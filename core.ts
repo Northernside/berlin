@@ -12,5 +12,5 @@ for (let files of fs.readdirSync("./plugins")) {
     }
 }
 
-broadcastMessage(core, Channel.DISCORD, `Registered ${pluginManager.plugins.length} plugin${pluginManager.plugins.length === 1 ? "" : "s"}.`);
+broadcastMessage(core, Channel.DISCORD, `Registered ${pluginManager.plugins.length} plugin${pluginManager.plugins.length === 1 ? "" : "s"}.\n\n${pluginManager.plugins.map(plugin => `\\- ${plugin.name}`).join("\n")}`);
 pluginManager.executePlugins();
