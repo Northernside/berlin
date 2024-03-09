@@ -1,3 +1,5 @@
+import fs from "node:fs";
+
 export type Plugin = {
     name: string;
     run: () => void;
@@ -11,8 +13,10 @@ export class PluginManager {
     }
 
     registerPlugin(plugin: Plugin) {
-        if (plugin && typeof plugin.run === "function") this.plugins.push(plugin);
-        else console.error(`[${plugin.name}] Invalid plugin format.`);
+        if (plugin && typeof plugin.run === "function") {
+            this.plugins.push(plugin);
+            fs.mkdirSync(`./data/${plugin.name}`, { recursive: true });
+        } else console.error(`[${plugin.name}] Invalid plugin format.`);
     }
 
     executePlugins() {
